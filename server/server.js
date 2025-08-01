@@ -20,6 +20,8 @@ mongoose.connect(MONGODB_URI)
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/workspaces', require('./routes/workspaces'));
 app.use('/api/invites', require('./routes/invites'));
+app.use('/api/github', require('./routes/githubAuth'));
+
 
 // Test route
 app.get('/', (req, res) => {

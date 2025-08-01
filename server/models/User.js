@@ -27,6 +27,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
+  },
+  // GitHub integration fields
+  githubAccessToken: {
+    type: String,
+    select: false // Don't include in regular queries for security
+  },
+  githubUsername: {
+    type: String
+  },
+  githubId: {
+    type: Number
+  },
+  githubProfileUrl: {
+    type: String
+  },
+  githubConnectedAt: {
+    type: Date
   }
 }, {
   timestamps: true
