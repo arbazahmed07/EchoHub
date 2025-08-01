@@ -63,11 +63,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Load user
+  // Load user - FIXED VERSION
   const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      dispatch({ type: 'AUTH_ERROR' });
+      return;
     }
+
+    setAuthToken(token);
 
     try {
       const res = await axios.get('http://localhost:5000/api/auth/me');
@@ -76,6 +81,7 @@ export const AuthProvider = ({ children }) => {
         payload: res.data,
       });
     } catch (err) {
+      console.error('Error loading user:', err);
       dispatch({ type: 'AUTH_ERROR' });
     }
   };
